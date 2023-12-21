@@ -12,7 +12,8 @@
   "exclude": [
     "jest.config.ts",
     "src/**/*.spec.ts",
-    "src/**/*.test.ts"
+    "src/**/*.test.ts",
+    "mikro-orm.config.ts"
   ],
   "include": [
     "src/**/*.ts"
