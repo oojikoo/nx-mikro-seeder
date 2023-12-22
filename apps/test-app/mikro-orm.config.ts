@@ -16,7 +16,6 @@ const config: Options = {
   seeder: {
     path: 'src/infrastructure/database/seeders',
   },
-  // logger: logger.log.bind(logger),
   debug: true,
   highlighter: new SqlHighlighter(),
   baseDir: __dirname,

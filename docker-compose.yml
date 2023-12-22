@@ -1,0 +1,34 @@
+
+version: '3.9'
+
+volumes:
+  test-mariadb: {}
+  test-pg: {}
+networks:
+  nats: {}
+  local:
+      name: local
+      driver: bridge
+services:
+  test-mariadb:
+    image: mariadb:10.5
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - '3306:3306'
+    volumes:
+      - test-mariadb:/var/lib/mysql
+      - ./docker/initmaria.d:/docker-entrypoint-initdb.d
+  test-pg:
+    image: postgres:15
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - test-pg:/var/lib/postgresql/data
+      - ./docker/init-pg.sql:/docker-entrypoint-initdb.d/init.sql
+
